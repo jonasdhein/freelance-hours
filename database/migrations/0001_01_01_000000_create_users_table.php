@@ -8,6 +8,8 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
+     * 
+     * php artisan migration:fresh -> DESTROI TODO O BANCO ATUAL
      */
     public function up(): void
     {
@@ -15,16 +17,9 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
-            $table->timestamps();
-        });
-
-        Schema::create('password_reset_tokens', function (Blueprint $table) {
-            $table->string('email')->primary();
-            $table->string('token');
-            $table->timestamp('created_at')->nullable();
+            $table->string('avatar')->nullable();
+            $table->unsignedTinyInteger('rating')->default(0); //0 a 255 caracteres positivos
+            $table->timestamps(); //created_at e updated_at
         });
 
         Schema::create('sessions', function (Blueprint $table) {
@@ -43,7 +38,6 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('users');
-        Schema::dropIfExists('password_reset_tokens');
         Schema::dropIfExists('sessions');
     }
 };
