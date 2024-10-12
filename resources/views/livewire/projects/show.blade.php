@@ -1,3 +1,3 @@
 <div>
-Componente livewire projects.show
+    Componente livewire projects.show
 </div>
